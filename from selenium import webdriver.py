@@ -50,16 +50,16 @@ phone.click()
 
 # 휴대전화 번호 입력
 id1 = driver.find_element(By.XPATH, '//*[@id="txtCpNo2"]')
-id1.send_keys('9881')
+id1.send_keys('7517')
 time.sleep(0.5)
 
 id2 = driver.find_element(By.XPATH, '//*[@id="txtCpNo3"]')
-id2.send_keys('1073')
+id2.send_keys('8290')
 time.sleep(0.5)
 
 # 비밀번호 입력
 pw = driver.find_element(By.XPATH, '//*[@id="txtPwd1"]')
-pw.send_keys('qkrwpdn!1')
+pw.send_keys('qkrwkao97rud!')
 time.sleep(0.5)
 
 # 로그인 버튼 클릭
@@ -77,21 +77,29 @@ time.sleep(1)
 
 departure = driver.find_element(By.XPATH, '//*[@id="start"]')
 departure.clear()
-departure.send_keys('구미')
+departure.send_keys('대전')
 time.sleep(0.5)
 
 stop = driver.find_element(By.XPATH, '//*[@id="get"]')
 stop.clear()
-stop.send_keys('서울')
+stop.send_keys('경주')
 time.sleep(0.5)
+
+
+# ActionChains를 사용해 빈 화면(예: (0, 0) 좌표) 클릭
+ActionChains(driver).move_by_offset(10, 10).click().perform()
+
+# 클릭 이후 마우스 위치 초기화
+ActionChains(driver).move_by_offset(-10, -10).perform()
+
 
 day = driver.find_element(By.XPATH, '//*[@id="s_day"]')
 day.click()
-day2 = driver.find_element(By.XPATH, '//*[@id="s_day"]/option[14]')
+day2 = driver.find_element(By.XPATH, '//*[@id="s_day"]/option[28]')
 day2.click()
 time.sleep(0.5)
 
-hour = driver.find_element(By.XPATH, '//*[@id="s_hour"]/option[11]')
+hour = driver.find_element(By.XPATH, '//*[@id="s_hour"]/option[10]')
 hour.click()
 time.sleep(0.5)
 
@@ -103,7 +111,7 @@ while True:
     try:
         # "좌석매진" 상태인지 확인
         try:
-            seat_status_img = driver.find_element(By.XPATH, '//*[@id="tableResult"]/tbody/tr[5]/td[6]/img')
+            seat_status_img = driver.find_element(By.XPATH, '//*[@id="tableResult"]/tbody/tr[3]/td[6]/img')
             seat_status_alt = seat_status_img.get_attribute('alt')
             if seat_status_alt == "좌석매진":
                 print("매진 상태, 페이지 새로 고침 중...")
@@ -115,7 +123,7 @@ while True:
 
         # 예약하기 버튼 확인 및 클릭
         reserve_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="tableResult"]/tbody/tr[5]/td[6]/a[1]'))
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="tableResult"]/tbody/tr[3]/td[6]/a[1]'))
         )
         reserve_button.click()
         time.sleep(1)
